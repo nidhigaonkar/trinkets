@@ -39,8 +39,8 @@ const AddFriend = () => {
     const data = {
       name,
       birthday,
-      relationship,
-      budgetPreference: budget,
+      relationship: '',
+      budgetPreference: '',
       notes,
       interests,
       aesthetics,
