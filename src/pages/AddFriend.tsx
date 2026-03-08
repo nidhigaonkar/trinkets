@@ -17,8 +17,6 @@ const AddFriend = () => {
 
   const [name, setName] = useState(existing?.name || '');
   const [birthday, setBirthday] = useState(existing?.birthday || '');
-  const [relationship, setRelationship] = useState(existing?.relationship || '');
-  const [budget, setBudget] = useState(existing?.budgetPreference || '');
   const [notes, setNotes] = useState(existing?.notes || '');
   const [interestInput, setInterestInput] = useState('');
   const [interests, setInterests] = useState<string[]>(existing?.interests || []);
