@@ -17,8 +17,6 @@ const AddFriend = () => {
 
   const [name, setName] = useState(existing?.name || '');
   const [birthday, setBirthday] = useState(existing?.birthday || '');
-  const [relationship, setRelationship] = useState(existing?.relationship || '');
-  const [budget, setBudget] = useState(existing?.budgetPreference || '');
   const [notes, setNotes] = useState(existing?.notes || '');
   const [interestInput, setInterestInput] = useState('');
   const [interests, setInterests] = useState<string[]>(existing?.interests || []);
@@ -41,8 +39,8 @@ const AddFriend = () => {
     const data = {
       name,
       birthday,
-      relationship,
-      budgetPreference: budget,
+      relationship: '',
+      budgetPreference: '',
       notes,
       interests,
       aesthetics,
@@ -77,18 +75,8 @@ const AddFriend = () => {
               <Input id="name" value={name} onChange={e => setName(e.target.value)} required placeholder="Their name" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="relationship">Relationship</Label>
-              <Input id="relationship" value={relationship} onChange={e => setRelationship(e.target.value)} placeholder="Best friend, sister, etc." />
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
               <Label htmlFor="birthday">Birthday</Label>
               <Input id="birthday" type="date" value={birthday} onChange={e => setBirthday(e.target.value)} required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="budget">Budget Preference</Label>
-              <Input id="budget" value={budget} onChange={e => setBudget(e.target.value)} placeholder="$25-50, under $30, etc." />
             </div>
           </div>
         </section>
