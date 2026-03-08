@@ -44,7 +44,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           </nav>
         </div>
       </header>
-      <main className="container mx-auto px-8 py-10">
+      <main className="container mx-auto px-8 py-10 relative z-10">
         {children}
       </main>
     </div>
