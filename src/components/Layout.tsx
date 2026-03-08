@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Gift, Users, Plus, Settings } from 'lucide-react';
 import FlowerAccent from './FlowerAccent';
+import floralBg from '@/assets/floral-bg.png';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
