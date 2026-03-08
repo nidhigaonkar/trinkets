@@ -13,8 +13,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border">
+    <div className="min-h-screen bg-background relative">
+      {/* Floral background */}
+      <div
+        className="fixed inset-0 pointer-events-none opacity-[0.07] bg-repeat"
+        style={{ backgroundImage: `url(${floralBg})`, backgroundSize: '900px' }}
+      />
+      <header className="border-b border-border relative z-10 bg-background/80 backdrop-blur-sm">
         <div className="container mx-auto px-8 py-6 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
             <Gift className="w-5 h-5 text-foreground" strokeWidth={1.5} />
