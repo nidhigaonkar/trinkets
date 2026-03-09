@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import FriendProfile from "./pages/FriendProfile";
 import AddFriend from "./pages/AddFriend";
 import SettingsPage from "./pages/SettingsPage";
+import Wishlist from "./pages/Wishlist";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
