@@ -31,7 +31,7 @@ const FriendCard = ({ friend }: { friend: Friend }) => {
 
   return (
     <div
-      className="perspective-1000 w-full aspect-square cursor-pointer select-none"
+      className="perspective-1000 w-full aspect-square cursor-pointer select-none max-w-[200px]"
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
     >
@@ -41,17 +41,17 @@ const FriendCard = ({ friend }: { friend: Friend }) => {
         }`}
       >
         {/* Front */}
-        <div className="absolute inset-0 backface-hidden rounded-2xl border border-border bg-card p-6 flex flex-col items-center justify-center gap-3 hover:shadow-sm transition-shadow">
+        <div className="absolute inset-0 backface-hidden rounded-2xl border border-border bg-card p-4 flex flex-col items-center justify-center gap-2 hover:shadow-sm transition-shadow">
           {friend.avatarUrl ? (
-            <img src={friend.avatarUrl} alt={friend.name} className="w-16 h-16 rounded-full object-cover border border-border" />
+            <img src={friend.avatarUrl} alt={friend.name} className="w-12 h-12 rounded-full object-cover border border-border" />
           ) : (
-            <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center">
-              <span className="font-serif text-2xl text-secondary-foreground">
+            <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+              <span className="font-serif text-xl text-secondary-foreground">
                 {friend.name.charAt(0)}
               </span>
             </div>
           )}
-          <h3 className="font-serif text-xl font-semibold text-card-foreground tracking-tight text-center">
+          <h3 className="font-serif text-base font-semibold text-card-foreground tracking-tight text-center">
             {friend.name}
           </h3>
           {friend.birthday && (
@@ -66,7 +66,7 @@ const FriendCard = ({ friend }: { friend: Friend }) => {
         </div>
 
         {/* Back */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border border-border bg-card p-5 flex flex-col overflow-hidden">
+        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border border-border bg-card p-3 flex flex-col overflow-hidden">
           <h3 className="font-serif text-lg font-semibold text-card-foreground tracking-tight mb-3 text-center">
             {friend.name}
           </h3>
