@@ -43,10 +43,10 @@ const FriendCard = ({ friend }: { friend: Friend }) => {
         {/* Front */}
         <div className="absolute inset-0 backface-hidden rounded-2xl border border-border bg-card p-4 flex flex-col items-center justify-center gap-2 hover:shadow-sm transition-shadow">
           {friend.avatarUrl ? (
-            <img src={friend.avatarUrl} alt={friend.name} className="w-16 h-16 rounded-full object-cover border border-border" />
+            <img src={friend.avatarUrl} alt={friend.name} className="w-12 h-12 rounded-full object-cover border border-border" />
           ) : (
-            <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center">
-              <span className="font-serif text-2xl text-secondary-foreground">
+            <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+              <span className="font-serif text-xl text-secondary-foreground">
                 {friend.name.charAt(0)}
               </span>
             </div>
