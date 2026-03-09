@@ -51,7 +51,7 @@ const FriendCard = ({ friend }: { friend: Friend }) => {
               </span>
             </div>
           )}
-          <h3 className="font-serif text-xl font-semibold text-card-foreground tracking-tight text-center">
+          <h3 className="font-serif text-base font-semibold text-card-foreground tracking-tight text-center">
             {friend.name}
           </h3>
           {friend.birthday && (
