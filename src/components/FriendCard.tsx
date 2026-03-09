@@ -31,7 +31,7 @@ const FriendCard = ({ friend }: { friend: Friend }) => {
 
   return (
     <div
-      className="perspective-1000 w-full aspect-square cursor-pointer select-none"
+      className="perspective-1000 w-full aspect-square cursor-pointer select-none max-w-[200px]"
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
     >
