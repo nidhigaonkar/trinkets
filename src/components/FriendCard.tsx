@@ -66,7 +66,7 @@ const FriendCard = ({ friend }: { friend: Friend }) => {
         </div>
 
         {/* Back */}
-        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border border-border bg-card p-5 flex flex-col overflow-hidden">
+        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border border-border bg-card p-3 flex flex-col overflow-hidden">
           <h3 className="font-serif text-lg font-semibold text-card-foreground tracking-tight mb-3 text-center">
             {friend.name}
           </h3>
