@@ -43,3 +43,10 @@ export interface ChatMessage {
   content: string;
   timestamp: string;
 }
+
+export interface WishlistItem {
+  id: string;
+  name: string;
+  url?: string;
+  createdAt: string;
+}

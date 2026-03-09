@@ -9,6 +9,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const navItems = [
     { to: '/', icon: Users, label: 'Friends' },
     { to: '/add', icon: Plus, label: 'Add Friend' },
+    { to: '/wishlist', icon: Heart, label: 'My Wishlist' },
     { to: '/settings', icon: Settings, label: 'Settings' },
   ];
 
