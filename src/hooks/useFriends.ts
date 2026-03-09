@@ -31,7 +31,9 @@ export function useFriends() {
       moodboard: [],
       giftHistory: [],
     };
-    setFriends(prev => [...prev, newFriend]);
+    const updated = [...loadFriends(), newFriend];
+    saveFriends(updated);
+    setFriends(updated);
     return newFriend.id;
   }, []);
 
