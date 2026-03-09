@@ -51,8 +51,8 @@ const AddFriend = () => {
       updateFriend(existing.id, data);
       navigate(`/friend/${existing.id}`);
     } else {
-      const newId = addFriend(data);
-      navigate(`/friend/${newId}`);
+      addFriend(data);
+      navigate('/');
     }
   };
 
