@@ -71,12 +71,9 @@ const Dashboard = () => {
       {/* Friends Grid */}
       <section>
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
-            <Gift className="w-4 h-4 text-muted-foreground" strokeWidth={1.5} />
-            <h3 className="font-serif text-lg text-muted-foreground">
-              Friends ({friends.length})
-            </h3>
-          </div>
+          <h3 className="font-serif text-lg text-muted-foreground">
+            Friends ({friends.length})
+          </h3>
           <Link to="/add">
             <Button variant="outline" size="sm" className="gap-1.5">
               <Plus className="w-3.5 h-3.5" />
