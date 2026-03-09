@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Gift, Users, Plus, Settings } from 'lucide-react';
+import { Gift, Users, Plus, Settings, Heart } from 'lucide-react';
 import FlowerAccent from './FlowerAccent';
 import floralBg from '@/assets/floral-bg.png';
 
@@ -9,6 +9,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const navItems = [
     { to: '/', icon: Users, label: 'Friends' },
     { to: '/add', icon: Plus, label: 'Add Friend' },
+    { to: '/wishlist', icon: Heart, label: 'My Wishlist' },
     { to: '/settings', icon: Settings, label: 'Settings' },
   ];
 
