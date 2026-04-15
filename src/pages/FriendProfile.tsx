@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, Edit, Trash2, Send, Sparkles, Plus, Heart, Meh, Package } from 'lucide-react';
+import { Calendar, Edit, Trash2, Plus, Heart, Meh, Package } from 'lucide-react';
 import FlowerAccent from '@/components/FlowerAccent';
-import { ChatMessage, GiftHistoryItem, MoodboardItem } from '@/types/friend';
+import { GiftHistoryItem, MoodboardItem } from '@/types/friend';
 
 const FriendProfile = () => {
   const { id } = useParams();
@@ -15,9 +15,6 @@ const FriendProfile = () => {
   const { getFriend, updateFriend, deleteFriend } = useFriends();
   const friend = getFriend(id!);
 
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
-  const [chatInput, setChatInput] = useState('');
-  const [isAiLoading, setIsAiLoading] = useState(false);
 
   // Moodboard
   const [moodboardInput, setMoodboardInput] = useState('');
@@ -44,30 +41,6 @@ const FriendProfile = () => {
     }
   };
 
-  const handleChat = async () => {
-    if (!chatInput.trim()) return;
-    const userMsg: ChatMessage = {
-      id: crypto.randomUUID(),
-      role: 'user',
-      content: chatInput,
-      timestamp: new Date().toISOString(),
-    };
-    setChatMessages(prev => [...prev, userMsg]);
-    setChatInput('');
-    setIsAiLoading(true);
-
-    // Simulated AI response (replace with real API)
-    setTimeout(() => {
-      const aiMsg: ChatMessage = {
-        id: crypto.randomUUID(),
-        role: 'assistant',
-        content: `Based on ${friend.name}'s love of ${friend.interests.slice(0, 2).join(' and ') || 'their interests'}, here are some ideas:\n\n• A curated gift box matching their ${friend.aesthetics[0] || 'personal'} aesthetic\n• Something handmade related to ${friend.interests[0] || 'their hobbies'}\n• A thoughtful experience gift\n\nWant me to narrow it down by budget or occasion?`,
-        timestamp: new Date().toISOString(),
-      };
-      setChatMessages(prev => [...prev, aiMsg]);
-      setIsAiLoading(false);
-    }, 1200);
-  };
 
   const addMoodboardItem = () => {
     if (!moodboardInput.trim()) return;
@@ -187,11 +160,8 @@ const FriendProfile = () => {
       <FlowerAccent variant="divider" className="w-48 mx-auto text-muted-foreground mb-8" />
 
       {/* Tabs */}
-      <Tabs defaultValue="ai" className="w-full">
+      <Tabs defaultValue="moodboard" className="w-full">
         <TabsList className="w-full justify-start bg-transparent border-b border-border rounded-none p-0 h-auto">
-          <TabsTrigger value="ai" className="rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:shadow-none px-4 py-2.5 text-sm">
-            <Sparkles className="w-3.5 h-3.5 mr-1.5" /> Gift Ideas
-          </TabsTrigger>
           <TabsTrigger value="moodboard" className="rounded-none border-b-2 border-transparent data-[state=active]:border-foreground data-[state=active]:shadow-none px-4 py-2.5 text-sm">
             Moodboard
           </TabsTrigger>
@@ -199,53 +169,6 @@ const FriendProfile = () => {
             <Package className="w-3.5 h-3.5 mr-1.5" /> Gift History
           </TabsTrigger>
         </TabsList>
-
-        {/* AI Chat */}
-        <TabsContent value="ai" className="pt-6">
-          <div className="border border-border rounded-md overflow-hidden">
-            <div className="h-80 overflow-y-auto p-5 space-y-4 bg-card">
-              {chatMessages.length === 0 && (
-                <div className="text-center py-12">
-                  <FlowerAccent variant="corner" className="w-16 h-16 mx-auto mb-3 opacity-30" />
-                  <p className="font-serif text-lg mb-1">Ask for gift ideas</p>
-                  <p className="text-xs text-muted-foreground">
-                    I already know about {friend.name}'s interests. Just ask!
-                  </p>
-                </div>
-              )}
-              {chatMessages.map(msg => (
-                <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] text-sm px-4 py-3 rounded-md whitespace-pre-wrap ${
-                    msg.role === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-secondary text-secondary-foreground'
-                  }`}>
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-              {isAiLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-secondary text-secondary-foreground text-sm px-4 py-3 rounded-md">
-                    <span className="animate-pulse">Thinking...</span>
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className="border-t border-border p-3 flex gap-2 bg-card">
-              <Input
-                value={chatInput}
-                onChange={e => setChatInput(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && handleChat()}
-                placeholder={`Gift ideas for ${friend.name}...`}
-                className="border-0 shadow-none focus-visible:ring-0"
-              />
-              <Button size="sm" onClick={handleChat} disabled={isAiLoading}>
-                <Send className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
-        </TabsContent>
 
         {/* Moodboard */}
         <TabsContent value="moodboard" className="pt-6">
