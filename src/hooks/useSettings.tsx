@@ -23,7 +23,13 @@ interface SettingsContextType {
   setBackground: (bg: BackgroundOption) => void;
 }
 
-const SettingsContext = createContext<SettingsContextType | null>(null);
+// Provide a working default so useSettings works even outside the provider
+const defaultContext: SettingsContextType = {
+  settings: DEFAULT_SETTINGS,
+  setBackground: () => {},
+};
+
+const SettingsContext = createContext<SettingsContextType>(defaultContext);
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<Settings>(load);
@@ -44,8 +50,5 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 }
 
 export function useSettings() {
-  const ctx = useContext(SettingsContext);
-  if (!ctx) throw new Error('useSettings must be used within SettingsProvider');
-  return ctx;
+  return useContext(SettingsContext);
 }
-
