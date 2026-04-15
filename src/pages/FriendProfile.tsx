@@ -170,53 +170,6 @@ const FriendProfile = () => {
           </TabsTrigger>
         </TabsList>
 
-        {/* AI Chat */}
-        <TabsContent value="ai" className="pt-6">
-          <div className="border border-border rounded-md overflow-hidden">
-            <div className="h-80 overflow-y-auto p-5 space-y-4 bg-card">
-              {chatMessages.length === 0 && (
-                <div className="text-center py-12">
-                  <FlowerAccent variant="corner" className="w-16 h-16 mx-auto mb-3 opacity-30" />
-                  <p className="font-serif text-lg mb-1">Ask for gift ideas</p>
-                  <p className="text-xs text-muted-foreground">
-                    I already know about {friend.name}'s interests. Just ask!
-                  </p>
-                </div>
-              )}
-              {chatMessages.map(msg => (
-                <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] text-sm px-4 py-3 rounded-md whitespace-pre-wrap ${
-                    msg.role === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-secondary text-secondary-foreground'
-                  }`}>
-                    {msg.content}
-                  </div>
-                </div>
-              ))}
-              {isAiLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-secondary text-secondary-foreground text-sm px-4 py-3 rounded-md">
-                    <span className="animate-pulse">Thinking...</span>
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className="border-t border-border p-3 flex gap-2 bg-card">
-              <Input
-                value={chatInput}
-                onChange={e => setChatInput(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && handleChat()}
-                placeholder={`Gift ideas for ${friend.name}...`}
-                className="border-0 shadow-none focus-visible:ring-0"
-              />
-              <Button size="sm" onClick={handleChat} disabled={isAiLoading}>
-                <Send className="w-4 h-4" />
-              </Button>
-            </div>
-          </div>
-        </TabsContent>
-
         {/* Moodboard */}
         <TabsContent value="moodboard" className="pt-6">
           <div className="flex gap-2 mb-6">
