@@ -45,7 +45,15 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
 export function useSettings() {
   const ctx = useContext(SettingsContext);
-  if (!ctx) throw new Error('useSettings must be used within SettingsProvider');
+  if (!ctx) {
+    // Fallback for HMR edge cases
+    const [settings, setSettings] = useState<Settings>(load);
+    useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(settings)); }, [settings]);
+    const setBackground = useCallback((bg: BackgroundOption) => {
+      setSettings(prev => ({ ...prev, background: bg }));
+    }, []);
+    return { settings, setBackground };
+  }
   return ctx;
 }
 
