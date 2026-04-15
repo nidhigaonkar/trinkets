@@ -1,5 +1,5 @@
 import FlowerAccent from '@/components/FlowerAccent';
-import { useSettings, BackgroundOption } from '@/hooks/useSettings';
+import { useSettings, type BackgroundOption } from '@/hooks/useSettings';
 import { Check } from 'lucide-react';
 
 const bgOptions: { value: BackgroundOption; label: string; preview: string }[] = [
