@@ -10,6 +10,7 @@ import AddFriend from "./pages/AddFriend";
 import SettingsPage from "./pages/SettingsPage";
 import Wishlist from "./pages/Wishlist";
 import NotFound from "./pages/NotFound";
+import { SettingsProvider } from "./hooks/useSettings";
 
 const queryClient = new QueryClient();
 
@@ -19,17 +20,19 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/friend/:id" element={<FriendProfile />} />
-            <Route path="/add" element={<AddFriend />} />
-            <Route path="/edit/:id" element={<AddFriend />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/settings" element={<SettingsPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+        <SettingsProvider>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/friend/:id" element={<FriendProfile />} />
+              <Route path="/add" element={<AddFriend />} />
+              <Route path="/edit/:id" element={<AddFriend />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/settings" element={<SettingsPage />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </SettingsProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
