@@ -23,7 +23,13 @@ interface SettingsContextType {
   setBackground: (bg: BackgroundOption) => void;
 }
 
-const SettingsContext = createContext<SettingsContextType | null>(null);
+// Provide a working default so useSettings works even outside the provider
+const defaultContext: SettingsContextType = {
+  settings: DEFAULT_SETTINGS,
+  setBackground: () => {},
+};
+
+const SettingsContext = createContext<SettingsContextType>(defaultContext);
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
   const [settings, setSettings] = useState<Settings>(load);
@@ -44,16 +50,5 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 }
 
 export function useSettings() {
-  const ctx = useContext(SettingsContext);
-  if (!ctx) {
-    // Fallback for HMR edge cases
-    const [settings, setSettings] = useState<Settings>(load);
-    useEffect(() => { localStorage.setItem(STORAGE_KEY, JSON.stringify(settings)); }, [settings]);
-    const setBackground = useCallback((bg: BackgroundOption) => {
-      setSettings(prev => ({ ...prev, background: bg }));
-    }, []);
-    return { settings, setBackground };
-  }
-  return ctx;
+  return useContext(SettingsContext);
 }
-
