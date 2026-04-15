@@ -10,7 +10,7 @@ import AddFriend from "./pages/AddFriend";
 import SettingsPage from "./pages/SettingsPage";
 import Wishlist from "./pages/Wishlist";
 import NotFound from "./pages/NotFound";
-import { SettingsProvider } from "./hooks/useSettings";
+import { SettingsProvider } from "@/hooks/useSettings";
 
 const queryClient = new QueryClient();
 
