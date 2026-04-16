@@ -28,6 +28,7 @@ const App = () => (
               <Route path="/add" element={<AddFriend />} />
               <Route path="/edit/:id" element={<AddFriend />} />
               <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/inspiration" element={<Inspiration />} />
               <Route path="/settings" element={<SettingsPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
