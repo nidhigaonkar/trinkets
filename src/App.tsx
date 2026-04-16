@@ -9,6 +9,7 @@ import FriendProfile from "./pages/FriendProfile";
 import AddFriend from "./pages/AddFriend";
 import SettingsPage from "./pages/SettingsPage";
 import Wishlist from "./pages/Wishlist";
+import Inspiration from "./pages/Inspiration";
 import NotFound from "./pages/NotFound";
 import { SettingsProvider } from "@/hooks/useSettings";
 
@@ -28,6 +29,7 @@ const App = () => (
               <Route path="/add" element={<AddFriend />} />
               <Route path="/edit/:id" element={<AddFriend />} />
               <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/inspiration" element={<Inspiration />} />
               <Route path="/settings" element={<SettingsPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
