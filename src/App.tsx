@@ -9,6 +9,7 @@ import FriendProfile from "./pages/FriendProfile";
 import AddFriend from "./pages/AddFriend";
 import SettingsPage from "./pages/SettingsPage";
 import Wishlist from "./pages/Wishlist";
+import Inspiration from "./pages/Inspiration";
 import NotFound from "./pages/NotFound";
 import { SettingsProvider } from "@/hooks/useSettings";
 
