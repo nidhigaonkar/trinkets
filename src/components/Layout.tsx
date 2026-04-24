@@ -32,19 +32,19 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       case 'dots':
         return {
           style: {
-            backgroundImage: 'radial-gradient(circle, hsl(0 0% 30%) 1.5px, transparent 1.5px)',
+            backgroundImage: 'radial-gradient(circle, hsl(0 0% 50%) 1.2px, transparent 1.2px)',
             backgroundSize: '18px 18px',
           },
-          opacity: 'opacity-100',
+          opacity: 'opacity-30',
         };
       case 'grid':
         return {
           style: {
             backgroundImage:
-              'linear-gradient(hsl(0 0% 85%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 85%) 1px, transparent 1px)',
+              'linear-gradient(hsl(0 0% 70%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 70%) 1px, transparent 1px)',
             backgroundSize: '32px 32px',
           },
-          opacity: 'opacity-100',
+          opacity: 'opacity-40',
         };
       case 'none':
       default:
