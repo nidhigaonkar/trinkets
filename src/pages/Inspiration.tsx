@@ -141,29 +141,26 @@ const Inspiration = () => {
           All
         </button>
         {ALL_TAGS.filter(tag => tag !== 'luxury').map(tag => (
-          <span key={tag} className="contents">
-            <button
-              onClick={() => setActiveTag(tag === activeTag ? null : tag)}
-              className={`text-xs px-3 py-1 rounded-full border transition-colors ${activeTag === tag ? 'bg-foreground text-background border-foreground' : 'border-border text-muted-foreground hover:text-foreground'}`}
-            >
-              {tag}
-            </button>
-            {tag === 'self-care' && (
-              <div className="flex items-center gap-2">
-                <ArrowUpDown className="w-3.5 h-3.5 text-muted-foreground" />
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as SortOption)}
-                  className="text-xs px-2 py-1 rounded-full border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20"
-                >
-                  <option value="default">Default</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                </select>
-              </div>
-            )}
-          </span>
+          <button
+            key={tag}
+            onClick={() => setActiveTag(tag === activeTag ? null : tag)}
+            className={`text-xs px-3 py-1 rounded-full border transition-colors ${activeTag === tag ? 'bg-foreground text-background border-foreground' : 'border-border text-muted-foreground hover:text-foreground'}`}
+          >
+            {tag}
+          </button>
         ))}
+        <div className="ml-auto flex items-center gap-2">
+          <ArrowUpDown className="w-3.5 h-3.5 text-muted-foreground" />
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as SortOption)}
+            className="text-xs px-2 py-1 rounded-full border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20"
+          >
+            <option value="default">Default</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
+        </div>
       </div>
 
       {/* Pinterest-style masonry grid */}
