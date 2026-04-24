@@ -116,13 +116,13 @@ const FriendProfile = () => {
       {/* Quick Info */}
       <div className="grid grid-cols-3 gap-4 mb-8">
         {friend.budgetPreference && (
-          <div className="border border-border rounded-md p-4">
+          <div className="border border-border rounded-md p-4 bg-card">
             <p className="text-xs text-muted-foreground mb-1">Budget</p>
             <p className="text-sm font-medium">{friend.budgetPreference}</p>
           </div>
         )}
         {friend.clothingSizes && (friend.clothingSizes.top || friend.clothingSizes.bottom || friend.clothingSizes.shoe) && (
-          <div className="border border-border rounded-md p-4">
+          <div className="border border-border rounded-md p-4 bg-card">
             <p className="text-xs text-muted-foreground mb-1">Sizes</p>
             <p className="text-sm font-medium">
               {[friend.clothingSizes.top && `Top: ${friend.clothingSizes.top}`, friend.clothingSizes.bottom && `Bottom: ${friend.clothingSizes.bottom}`, friend.clothingSizes.shoe && `Shoe: ${friend.clothingSizes.shoe}`].filter(Boolean).join(' · ')}
@@ -130,7 +130,7 @@ const FriendProfile = () => {
           </div>
         )}
         {friend.notes && (
-          <div className="border border-border rounded-md p-4">
+          <div className="border border-border rounded-md p-4 bg-card">
             <p className="text-xs text-muted-foreground mb-1">Notes</p>
             <p className="text-sm">{friend.notes}</p>
           </div>
