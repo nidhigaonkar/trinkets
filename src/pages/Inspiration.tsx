@@ -133,50 +133,37 @@ const Inspiration = () => {
       <p className="text-sm text-muted-foreground mb-8">Browse gift ideas and tap the heart to save to your wishlist.</p>
 
       {/* Tag filters */}
-      <div className="space-y-2 mb-8">
-        {/* First row - main tags + sort */}
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            onClick={() => setActiveTag(null)}
-            className={`text-xs px-3 py-1 rounded-full border transition-colors ${!activeTag ? 'bg-foreground text-background border-foreground' : 'border-border text-muted-foreground hover:text-foreground'}`}
-          >
-            All
-          </button>
-          {ALL_TAGS.filter(tag => tag !== 'nature' && tag !== 'personal').map(tag => (
+      <div className="flex flex-wrap items-center gap-2 mb-8">
+        <button
+          onClick={() => setActiveTag(null)}
+          className={`text-xs px-3 py-1 rounded-full border transition-colors ${!activeTag ? 'bg-foreground text-background border-foreground' : 'border-border text-muted-foreground hover:text-foreground'}`}
+        >
+          All
+        </button>
+        {ALL_TAGS.filter(tag => tag !== 'luxury').map(tag => (
+          <span key={tag} className="contents">
             <button
-              key={tag}
               onClick={() => setActiveTag(tag === activeTag ? null : tag)}
               className={`text-xs px-3 py-1 rounded-full border transition-colors ${activeTag === tag ? 'bg-foreground text-background border-foreground' : 'border-border text-muted-foreground hover:text-foreground'}`}
             >
               {tag}
             </button>
-          ))}
-          <div className="flex-1" />
-          <div className="flex items-center gap-2">
-            <ArrowUpDown className="w-3.5 h-3.5 text-muted-foreground" />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortOption)}
-              className="text-xs px-2 py-1 rounded-full border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20"
-            >
-              <option value="default">Default</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-            </select>
-          </div>
-        </div>
-        {/* Second row - nature & personal */}
-        <div className="flex flex-wrap items-center gap-2">
-          {['nature', 'personal'].map(tag => (
-            <button
-              key={tag}
-              onClick={() => setActiveTag(tag === activeTag ? null : tag)}
-              className={`text-xs px-3 py-1 rounded-full border transition-colors ${activeTag === tag ? 'bg-foreground text-background border-foreground' : 'border-border text-muted-foreground hover:text-foreground'}`}
-            >
-              {tag}
-            </button>
-          ))}
-        </div>
+            {tag === 'self-care' && (
+              <div className="flex items-center gap-2">
+                <ArrowUpDown className="w-3.5 h-3.5 text-muted-foreground" />
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as SortOption)}
+                  className="text-xs px-2 py-1 rounded-full border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20"
+                >
+                  <option value="default">Default</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                </select>
+              </div>
+            )}
+          </span>
+        ))}
       </div>
 
       {/* Pinterest-style masonry grid */}
