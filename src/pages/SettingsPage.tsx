@@ -22,7 +22,7 @@ const SettingsPage = () => {
 
       <div className="space-y-6">
         {/* Background Selection */}
-        <div className="border border-border rounded-md p-6">
+        <div className="border border-border rounded-md p-6 bg-card">
           <h3 className="font-serif text-lg mb-4">Background</h3>
           <div className="grid grid-cols-5 gap-3">
             {bgOptions.map(opt => (
@@ -50,7 +50,7 @@ const SettingsPage = () => {
           </div>
         </div>
 
-        <div className="border border-border rounded-md p-6">
+        <div className="border border-border rounded-md p-6 bg-card">
           <h3 className="font-serif text-lg mb-2">About Trinkets</h3>
           <p className="text-sm text-muted-foreground leading-relaxed">
             A thoughtful gift-tracking companion. Keep track of your friends' interests,
@@ -58,7 +58,7 @@ const SettingsPage = () => {
           </p>
         </div>
 
-        <div className="border border-border rounded-md p-6">
+        <div className="border border-border rounded-md p-6 bg-card">
           <h3 className="font-serif text-lg mb-2">Data</h3>
           <p className="text-sm text-muted-foreground mb-4">
             All data is stored locally in your browser. Nothing is sent to any server.
