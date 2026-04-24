@@ -21,12 +21,13 @@ export function useWishlist() {
 
   useEffect(() => { save(items); }, [items]);
 
-  const addItem = useCallback((name: string, url?: string) => {
+  const addItem = useCallback((name: string, url?: string, details?: { description?: string; priceRange?: string; tags?: string[]; emoji?: string }) => {
     const item: WishlistItem = {
       id: crypto.randomUUID(),
       name,
       url: url || undefined,
       createdAt: new Date().toISOString(),
+      ...details,
     };
     const updated = [...load(), item];
     save(updated);

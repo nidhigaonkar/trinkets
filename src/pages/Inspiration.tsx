@@ -119,7 +119,12 @@ const Inspiration = () => {
       removeItem(existing.id);
       toast({ description: `Removed "${idea.name}" from wishlist` });
     } else {
-      addItem(idea.name);
+      addItem(idea.name, undefined, {
+        description: idea.description,
+        priceRange: idea.priceRange,
+        tags: idea.tags,
+        emoji: idea.emoji,
+      });
       toast({ description: `Saved "${idea.name}" to your wishlist 💕` });
     }
   };

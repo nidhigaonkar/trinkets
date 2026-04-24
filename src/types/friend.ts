@@ -49,4 +49,8 @@ export interface WishlistItem {
   name: string;
   url?: string;
   createdAt: string;
+  description?: string;
+  priceRange?: string;
+  tags?: string[];
+  emoji?: string;
 }
