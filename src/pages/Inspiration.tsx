@@ -133,7 +133,7 @@ const Inspiration = () => {
       <p className="text-sm text-muted-foreground mb-8">Browse gift ideas and tap the heart to save to your wishlist.</p>
 
       {/* Tag filters */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex flex-wrap items-center gap-2 mb-8">
         <button
           onClick={() => setActiveTag(null)}
           className={`text-xs px-3 py-1 rounded-full border transition-colors ${!activeTag ? 'bg-foreground text-background border-foreground' : 'border-border text-muted-foreground hover:text-foreground'}`}
@@ -149,11 +149,24 @@ const Inspiration = () => {
             {tag}
           </button>
         ))}
+        <div className="flex-1" />
+        <div className="flex items-center gap-2">
+          <ArrowUpDown className="w-3.5 h-3.5 text-muted-foreground" />
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as SortOption)}
+            className="text-xs px-2 py-1 rounded-full border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20"
+          >
+            <option value="default">Default</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
+        </div>
       </div>
 
       {/* Pinterest-style masonry grid */}
       <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
-        {filtered.map(idea => (
+        {filteredAndSorted.map(idea => (
           <div key={idea.id} className="break-inside-avoid">
             <InspirationCard
               idea={idea}
