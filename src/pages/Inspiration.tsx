@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Heart } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { Heart, ArrowUpDown } from 'lucide-react';
 import { useWishlist } from '@/hooks/useWishlist';
 import FlowerAccent from '@/components/FlowerAccent';
 import { useToast } from '@/hooks/use-toast';
@@ -32,9 +32,19 @@ const GIFT_IDEAS: GiftIdea[] = [
   { id: '16', name: 'Succulent Terrarium', description: 'Glass geometric terrarium planted with three mini succulents & decorative stones.', priceRange: '$30–$45', tags: ['nature', 'home'], emoji: '🪴' },
   { id: '17', name: 'Cocktail Making Kit', description: 'Everything to mix craft cocktails at home: shaker, jigger, strainer & recipe cards.', priceRange: '$35–$55', tags: ['foodie', 'fun'], emoji: '🍸' },
   { id: '18', name: 'Washi Tape Collection', description: 'Set of 12 decorative washi tapes in floral and pastel patterns for journaling.', priceRange: '$12–$20', tags: ['stationery', 'creative'], emoji: '🎀' },
+  { id: '19', name: 'Yoga Mat & Strap', description: 'Premium non-slip yoga mat with alignment guides and matching cotton carry strap.', priceRange: '$35–$55', tags: ['sports', 'self-care'], emoji: '🧘' },
+  { id: '20', name: 'Resistance Bands Set', description: 'Set of 5 fabric resistance bands with different strength levels and carrying pouch.', priceRange: '$20–$35', tags: ['sports', 'practical'], emoji: '💪' },
+  { id: '21', name: 'Stainless Water Bottle', description: 'Insulated sports water bottle with time marker and fruit infuser insert.', priceRange: '$25–$40', tags: ['sports', 'practical'], emoji: '💧' },
 ];
 
 const ALL_TAGS = Array.from(new Set(GIFT_IDEAS.flatMap(i => i.tags))).sort();
+type SortOption = 'default' | 'price-low' | 'price-high';
+
+// Extract numeric price from range for sorting
+function getMinPrice(priceRange: string): number {
+  const match = priceRange.match(/\$(\d+)/);
+  return match ? parseInt(match[1], 10) : 0;
+}
 
 const InspirationCard = ({ idea, isSaved, onSave }: { idea: GiftIdea; isSaved: boolean; onSave: () => void }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -87,10 +97,21 @@ const Inspiration = () => {
   const { items, addItem, removeItem } = useWishlist();
   const { toast } = useToast();
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [sortBy, setSortBy] = useState<SortOption>('default');
 
   const savedNames = new Set(items.map(i => i.name));
 
-  const filtered = activeTag ? GIFT_IDEAS.filter(i => i.tags.includes(activeTag)) : GIFT_IDEAS;
+  const filteredAndSorted = useMemo(() => {
+    let result = activeTag ? GIFT_IDEAS.filter(i => i.tags.includes(activeTag)) : [...GIFT_IDEAS];
+    
+    if (sortBy === 'price-low') {
+      result.sort((a, b) => getMinPrice(a.priceRange) - getMinPrice(b.priceRange));
+    } else if (sortBy === 'price-high') {
+      result.sort((a, b) => getMinPrice(b.priceRange) - getMinPrice(a.priceRange));
+    }
+    
+    return result;
+  }, [activeTag, sortBy]);
 
   const toggleSave = (idea: GiftIdea) => {
     const existing = items.find(i => i.name === idea.name);
@@ -112,7 +133,7 @@ const Inspiration = () => {
       <p className="text-sm text-muted-foreground mb-8">Browse gift ideas and tap the heart to save to your wishlist.</p>
 
       {/* Tag filters */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex flex-wrap items-center gap-2 mb-8">
         <button
           onClick={() => setActiveTag(null)}
           className={`text-xs px-3 py-1 rounded-full border transition-colors ${!activeTag ? 'bg-foreground text-background border-foreground' : 'border-border text-muted-foreground hover:text-foreground'}`}
@@ -128,11 +149,24 @@ const Inspiration = () => {
             {tag}
           </button>
         ))}
+        <div className="flex-1" />
+        <div className="flex items-center gap-2">
+          <ArrowUpDown className="w-3.5 h-3.5 text-muted-foreground" />
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as SortOption)}
+            className="text-xs px-2 py-1 rounded-full border border-border bg-background text-foreground focus:outline-none focus:ring-1 focus:ring-foreground/20"
+          >
+            <option value="default">Default</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
+        </div>
       </div>
 
       {/* Pinterest-style masonry grid */}
       <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
-        {filtered.map(idea => (
+        {filteredAndSorted.map(idea => (
           <div key={idea.id} className="break-inside-avoid">
             <InspirationCard
               idea={idea}
