@@ -17,36 +17,50 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     { to: '/settings', icon: Settings, label: 'Settings' },
   ];
 
-  const getBackgroundStyle = () => {
+  const getBackgroundStyle = (): { style: React.CSSProperties; opacity: string } => {
     switch (settings.background) {
       case 'floral':
-        return { backgroundImage: `url(${floralBg})`, backgroundSize: '900px' };
+        return {
+          style: { backgroundImage: `url(${floralBg})`, backgroundSize: '900px' },
+          opacity: 'opacity-[0.07]',
+        };
       case 'floral-colored':
-        return { backgroundImage: `url(${floralColoredBg})`, backgroundSize: '400px' };
+        return {
+          style: { backgroundImage: `url(${floralColoredBg})`, backgroundSize: '400px' },
+          opacity: 'opacity-[0.07]',
+        };
       case 'dots':
         return {
-          backgroundImage: 'radial-gradient(circle, hsl(0 0% 45% / 0.12) 1px, transparent 1px)',
-          backgroundSize: '16px 16px',
+          style: {
+            backgroundImage: 'radial-gradient(circle, hsl(0 0% 30%) 1.5px, transparent 1.5px)',
+            backgroundSize: '18px 18px',
+          },
+          opacity: 'opacity-100',
         };
       case 'grid':
         return {
-          backgroundImage:
-            'linear-gradient(hsl(0 0% 90%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 90%) 1px, transparent 1px)',
-          backgroundSize: '32px 32px',
+          style: {
+            backgroundImage:
+              'linear-gradient(hsl(0 0% 85%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 85%) 1px, transparent 1px)',
+            backgroundSize: '32px 32px',
+          },
+          opacity: 'opacity-100',
         };
       case 'none':
       default:
-        return {};
+        return { style: {}, opacity: 'opacity-0' };
     }
   };
+
+  const bg = getBackgroundStyle();
 
   return (
     <div className="min-h-screen bg-background relative">
       {/* Dynamic background */}
       {settings.background !== 'none' && (
         <div
-          className="fixed inset-0 pointer-events-none opacity-[0.07] bg-repeat"
-          style={getBackgroundStyle()}
+          className={`fixed inset-0 pointer-events-none bg-repeat ${bg.opacity}`}
+          style={bg.style}
         />
       )}
       <header className="border-b border-border relative z-10 bg-background/80 backdrop-blur-sm">
