@@ -59,8 +59,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       {/* Dynamic background */}
       {settings.background !== 'none' && (
         <div
-          className="fixed inset-0 pointer-events-none opacity-[0.07] bg-repeat"
-          style={getBackgroundStyle()}
+          className={`fixed inset-0 pointer-events-none bg-repeat ${bg.opacity}`}
+          style={bg.style}
         />
       )}
       <header className="border-b border-border relative z-10 bg-background/80 backdrop-blur-sm">
