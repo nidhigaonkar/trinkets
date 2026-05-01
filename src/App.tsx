@@ -10,6 +10,7 @@ import AddFriend from "./pages/AddFriend";
 import SettingsPage from "./pages/SettingsPage";
 import Wishlist from "./pages/Wishlist";
 import Inspiration from "./pages/Inspiration";
+import InspirationGiftBaskets from "./pages/InspirationGiftBaskets";
 import NotFound from "./pages/NotFound";
 import { SettingsProvider } from "@/hooks/useSettings";
 
@@ -30,6 +31,7 @@ const App = () => (
               <Route path="/edit/:id" element={<AddFriend />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/inspiration" element={<Inspiration />} />
+              <Route path="/inspiration/gift-baskets" element={<InspirationGiftBaskets />} />
               <Route path="/settings" element={<SettingsPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

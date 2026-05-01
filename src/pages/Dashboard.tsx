@@ -32,7 +32,7 @@ const Dashboard = () => {
           Your <em>thoughtful</em> gift companion
         </h2>
         <p className="text-muted-foreground text-sm max-w-md mx-auto">
-          Keep track of your loved ones' interests and never give a forgettable gift again.
+          Keep track of your loved ones' interests and give gifts they'll love.
         </p>
       </div>
 

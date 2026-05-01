@@ -8,7 +8,19 @@ import {
   type ReactNode,
 } from 'react';
 
-export type BackgroundOption = 'floral' | 'floral-colored' | 'dots' | 'grid' | 'none';
+export type BackgroundOption = 'floral' | 'floral-colored' | 'dots' | 'grid' | 'stars' | 'waves' | 'blueprint' | 'circuit' | 'none';
+
+const VALID_BACKGROUNDS = new Set<BackgroundOption>([
+  'floral',
+  'floral-colored',
+  'dots',
+  'grid',
+  'stars',
+  'waves',
+  'blueprint',
+  'circuit',
+  'none',
+]);
 
 interface Settings {
   background: BackgroundOption;
@@ -20,7 +32,13 @@ const DEFAULT_SETTINGS: Settings = { background: 'floral' };
 function load(): Settings {
   try {
     const data = localStorage.getItem(STORAGE_KEY);
-    return data ? { ...DEFAULT_SETTINGS, ...JSON.parse(data) } : DEFAULT_SETTINGS;
+    if (!data) return DEFAULT_SETTINGS;
+    const parsed = JSON.parse(data) as Partial<Settings>;
+    const merged: Settings = { ...DEFAULT_SETTINGS, ...parsed };
+    if (!VALID_BACKGROUNDS.has(merged.background)) {
+      merged.background = DEFAULT_SETTINGS.background;
+    }
+    return merged;
   } catch {
     return DEFAULT_SETTINGS;
   }
