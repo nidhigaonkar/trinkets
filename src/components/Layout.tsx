@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Gift, Users, Plus, Settings, Heart, Lightbulb } from 'lucide-react';
+import { Gift, Users, Plus, Settings, Heart, Lightbulb, LogOut } from 'lucide-react';
 import FlowerAccent from './FlowerAccent';
 import { useSettings } from '@/hooks/useSettings';
+import { useAuth } from '@/hooks/useAuth';
 import floralBg from '@/assets/floral-bg.png';
 import floralColoredBg from '@/assets/floral-colored-bg.png';
 
