@@ -9,6 +9,7 @@ import floralColoredBg from '@/assets/floral-colored-bg.png';
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const { settings } = useSettings();
+  const { signOut } = useAuth();
 
   const navItems = [
     { to: '/', icon: Users, label: 'Friends' },
@@ -130,6 +131,14 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               </Link>
             );
             })}
+            <button
+              onClick={() => signOut()}
+              className="flex items-center gap-2 text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors"
+              title="Sign out"
+            >
+              <LogOut className="w-4 h-4" strokeWidth={1.5} />
+              Sign out
+            </button>
           </nav>
         </div>
       </header>
