@@ -64,20 +64,10 @@ const SettingsPage = () => {
 
         <div className="border border-border rounded-md p-6 bg-card">
           <h3 className="font-serif text-lg mb-2">Data</h3>
-          <p className="text-sm text-muted-foreground mb-4">
-            All data is stored locally in your browser. Nothing is sent to any server.
+          <p className="text-sm text-muted-foreground">
+            Your friends, wishlist, and saved inspiration are securely stored in your account
+            and synced across devices when you sign in.
           </p>
-          <button
-            onClick={() => {
-              if (confirm('This will delete all your data. Are you sure?')) {
-                localStorage.clear();
-                window.location.reload();
-              }
-            }}
-            className="text-sm text-destructive hover:underline"
-          >
-            Clear all data
-          </button>
         </div>
       </div>
     </div>
