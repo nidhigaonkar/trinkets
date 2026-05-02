@@ -85,7 +85,8 @@ export function useFriends() {
     if (updates.avatarUrl !== undefined) payload.avatar_url = updates.avatarUrl;
 
     setFriends(prev => prev.map(f => f.id === id ? { ...f, ...updates } : f));
-    await supabase.from('friends').update(payload).eq('id', id);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await supabase.from('friends').update(payload as any).eq('id', id);
   }, []);
 
   const deleteFriend = useCallback(async (id: string) => {
