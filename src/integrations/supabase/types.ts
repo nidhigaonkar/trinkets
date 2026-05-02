@@ -14,7 +14,141 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      friends: {
+        Row: {
+          aesthetics: Json
+          avatar_url: string | null
+          birthday: string | null
+          clothing_sizes: Json
+          created_at: string
+          favorites: Json
+          gift_history: Json
+          id: string
+          interests: Json
+          moodboard: Json
+          name: string
+          notes: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          aesthetics?: Json
+          avatar_url?: string | null
+          birthday?: string | null
+          clothing_sizes?: Json
+          created_at?: string
+          favorites?: Json
+          gift_history?: Json
+          id?: string
+          interests?: Json
+          moodboard?: Json
+          name: string
+          notes?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          aesthetics?: Json
+          avatar_url?: string | null
+          birthday?: string | null
+          clothing_sizes?: Json
+          created_at?: string
+          favorites?: Json
+          gift_history?: Json
+          id?: string
+          interests?: Json
+          moodboard?: Json
+          name?: string
+          notes?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      liked_inspiration: {
+        Row: {
+          created_at: string
+          data: Json
+          id: string
+          inspiration_key: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          id?: string
+          inspiration_key: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          id?: string
+          inspiration_key?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          name: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id: string
+          name?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      wishlist_items: {
+        Row: {
+          created_at: string
+          description: string | null
+          emoji: string | null
+          id: string
+          name: string
+          price_range: string | null
+          tags: Json
+          url: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          emoji?: string | null
+          id?: string
+          name: string
+          price_range?: string | null
+          tags?: Json
+          url?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          emoji?: string | null
+          id?: string
+          name?: string
+          price_range?: string | null
+          tags?: Json
+          url?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
