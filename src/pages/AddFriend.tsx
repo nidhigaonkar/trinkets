@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFriends } from '@/hooks/useFriends';
 import { Friend } from '@/types/friend';
@@ -15,16 +15,32 @@ const AddFriend = () => {
   const { friends, addFriend, updateFriend, getFriend } = useFriends();
   const existing = id ? getFriend(id) : undefined;
 
-  const [name, setName] = useState(existing?.name || '');
-  const [birthday, setBirthday] = useState(existing?.birthday || '');
-  const [notes, setNotes] = useState(existing?.notes || '');
+  const [name, setName] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [notes, setNotes] = useState('');
   const [interestInput, setInterestInput] = useState('');
-  const [interests, setInterests] = useState<string[]>(existing?.interests || []);
-  const [aesthetics, setAesthetics] = useState<string[]>(existing?.aesthetics || []);
+  const [interests, setInterests] = useState<string[]>([]);
+  const [aesthetics, setAesthetics] = useState<string[]>([]);
   const [aestheticInput, setAestheticInput] = useState('');
-  const [topSize, setTopSize] = useState(existing?.clothingSizes?.top || '');
-  const [bottomSize, setBottomSize] = useState(existing?.clothingSizes?.bottom || '');
-  const [shoeSize, setShoeSize] = useState(existing?.clothingSizes?.shoe || '');
+  const [topSize, setTopSize] = useState('');
+  const [bottomSize, setBottomSize] = useState('');
+  const [shoeSize, setShoeSize] = useState('');
+  const [hydrated, setHydrated] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  // Populate fields when editing — wait until friend data loads from the backend
+  useEffect(() => {
+    if (!id || hydrated || !existing) return;
+    setName(existing.name || '');
+    setBirthday(existing.birthday || '');
+    setNotes(existing.notes || '');
+    setInterests(existing.interests || []);
+    setAesthetics(existing.aesthetics || []);
+    setTopSize(existing.clothingSizes?.top || '');
+    setBottomSize(existing.clothingSizes?.bottom || '');
+    setShoeSize(existing.clothingSizes?.shoe || '');
+    setHydrated(true);
+  }, [id, existing, hydrated]);
 
   const addTag = (value: string, list: string[], setList: (v: string[]) => void, setInput: (v: string) => void) => {
     const trimmed = value.trim();
@@ -34,8 +50,10 @@ const AddFriend = () => {
     setInput('');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
     const data = {
       name,
       birthday,
@@ -47,14 +65,19 @@ const AddFriend = () => {
       favorites: [],
       clothingSizes: { top: topSize, bottom: bottomSize, shoe: shoeSize },
     };
-    if (existing) {
-      updateFriend(existing.id, data);
-      navigate(`/friend/${existing.id}`);
-    } else {
-      addFriend(data);
-      navigate('/');
+    try {
+      if (existing) {
+        await updateFriend(existing.id, data);
+        navigate(`/friend/${existing.id}`);
+      } else {
+        const newId = await addFriend(data);
+        navigate(newId ? `/friend/${newId}` : '/');
+      }
+    } finally {
+      setSubmitting(false);
     }
   };
+
 
   return (
     <div className="max-w-2xl mx-auto">
