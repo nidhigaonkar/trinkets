@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import morningSkyBg from '@/assets/morning-sky-bg.png';
+import thoughtfulGiftBg from '@/assets/thoughtful-gift-bg.png';
 
 const Landing = () => {
   return (
     <div 
       className="min-h-screen bg-cover bg-center flex flex-col relative"
-      style={{ backgroundImage: `url(${morningSkyBg})` }}
+      style={{ backgroundImage: `url(${thoughtfulGiftBg})` }}
     >
       {/* Optional subtle overlay to ensure text readability against the background */}
       <div className="absolute inset-0 bg-black/10 pointer-events-none" />
