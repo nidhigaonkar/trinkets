@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { Session, User } from '@supabase/supabase-js';
-import { supabase } from '@/integrations/supabase/client';
+// UI preview: uncomment when wiring Supabase session sync
+// import { supabase } from '@/integrations/supabase/client';
 
 interface AuthContextValue {
   user: User | null;
@@ -17,14 +18,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Set up listener FIRST
+    // Stub for UI preview — no Supabase session (stays logged out)
+    setLoading(false);
+
+    /* Restore when Supabase is enabled:
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
       setUser(newSession?.user ?? null);
       setLoading(false);
     });
 
-    // THEN check existing session
     supabase.auth.getSession().then(({ data: { session: existing } }) => {
       setSession(existing);
       setUser(existing?.user ?? null);
@@ -32,10 +35,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
 
     return () => subscription.unsubscribe();
+    */
   }, []);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    // await supabase.auth.signOut();
+    setSession(null);
+    setUser(null);
   };
 
   return (

@@ -13,6 +13,7 @@ import Wishlist from "./pages/Wishlist";
 import Inspiration from "./pages/Inspiration";
 import InspirationGiftBaskets from "./pages/InspirationGiftBaskets";
 import Auth from "./pages/Auth";
+import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
 import { SettingsProvider } from "@/hooks/useSettings";
 import { AuthProvider } from "@/hooks/useAuth";
@@ -28,20 +29,21 @@ const App = () => (
         <AuthProvider>
           <SettingsProvider>
             <Routes>
+              <Route path="/" element={<Landing />} />
               <Route path="/auth" element={<Auth />} />
+              <Route path="/inspiration" element={<Layout><Inspiration /></Layout>} />
+              <Route path="/inspiration/gift-baskets" element={<Layout><InspirationGiftBaskets /></Layout>} />
               <Route
                 path="*"
                 element={
                   <ProtectedRoute>
                     <Layout>
                       <Routes>
-                        <Route path="/" element={<Dashboard />} />
+                        <Route path="/dashboard" element={<Dashboard />} />
                         <Route path="/friend/:id" element={<FriendProfile />} />
                         <Route path="/add" element={<AddFriend />} />
                         <Route path="/edit/:id" element={<AddFriend />} />
                         <Route path="/wishlist" element={<Wishlist />} />
-                        <Route path="/inspiration" element={<Inspiration />} />
-                        <Route path="/inspiration/gift-baskets" element={<InspirationGiftBaskets />} />
                         <Route path="/settings" element={<SettingsPage />} />
                         <Route path="*" element={<NotFound />} />
                       </Routes>
