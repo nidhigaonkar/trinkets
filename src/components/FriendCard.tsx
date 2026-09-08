@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Heart } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { Friend } from '@/types/friend';
 
 function daysUntilBirthday(birthday: string): number {
@@ -59,7 +59,7 @@ const FriendCard = ({ friend }: { friend: Friend }) => {
           )}
           {isUpcoming && (
             <span className="text-xs px-2.5 py-0.5 bg-cream rounded-full flex items-center gap-1">
-              <Heart className="w-3 h-3 text-dusty-rose" strokeWidth={1.5} />
+              <Calendar className="w-3 h-3 text-muted-foreground" strokeWidth={1.5} />
               {days === 0 ? 'Today! 🎂' : `${days}d away`}
             </span>
           )}

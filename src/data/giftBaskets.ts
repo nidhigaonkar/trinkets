@@ -40,7 +40,7 @@ export const GIFT_BASKET_IDEAS: GiftBasketIdea[] = [
       'Hair ties and a claw clip',
       'Vanilla or coconut body mist',
       'Fuzzy socks',
-      'Sephora minis, Ulta impulse section, or Bath & Body Works',
+      'Sephora minis, Ulta skin care, or Bath & Body Works',
     ],
   },
   {

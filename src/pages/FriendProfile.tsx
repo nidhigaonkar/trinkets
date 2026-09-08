@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Calendar, Edit, Trash2, Plus, Heart, Meh, Package } from 'lucide-react';
+import { Calendar, Edit, Trash2, Plus, ThumbsUp, Meh, Package } from 'lucide-react';
 import FlowerAccent from '@/components/FlowerAccent';
 import { GiftHistoryItem, MoodboardItem } from '@/types/friend';
 
@@ -233,7 +233,7 @@ const FriendProfile = () => {
                       onClick={() => rateGift(gift.id, 'loved')}
                       className={`p-1.5 rounded-full border transition-colors ${gift.rating === 'loved' ? 'bg-cream border-dusty-rose' : 'border-border hover:border-dusty-rose'}`}
                     >
-                      <Heart className="w-3.5 h-3.5" strokeWidth={1.5} />
+                      <ThumbsUp className="w-3.5 h-3.5" strokeWidth={1.5} />
                     </button>
                     <button
                       onClick={() => rateGift(gift.id, 'okay')}

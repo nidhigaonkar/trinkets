@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Gift, Users, Plus, Settings, Heart, Lightbulb, LogOut } from 'lucide-react';
+import { Gift, Users, Plus, Settings, Bookmark, Lightbulb, LogOut } from 'lucide-react';
 import FlowerAccent from './FlowerAccent';
 import { useSettings } from '@/hooks/useSettings';
 import { useAuth } from '@/hooks/useAuth';
@@ -12,11 +12,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const { signOut, user } = useAuth();
 
   const navItems = [
-    { to: '/dashboard', icon: Users, label: 'Friends', requiresAuth: true },
-    { to: '/add', icon: Plus, label: 'Add Friend', requiresAuth: true },
-    { to: '/inspiration', icon: Lightbulb, label: 'Inspiration', requiresAuth: false },
-    { to: '/wishlist', icon: Heart, label: 'My Wishlist', requiresAuth: true },
-    { to: '/settings', icon: Settings, label: 'Settings', requiresAuth: true },
+    { to: '/dashboard', icon: Users, label: 'Friends' },
+    { to: '/add', icon: Plus, label: 'Add Friend' },
+    { to: '/inspiration', icon: Lightbulb, label: 'Inspiration' },
+    { to: '/wishlist', icon: Bookmark, label: 'My Wishlist' },
+    { to: '/settings', icon: Settings, label: 'Settings' },
   ];
 
   const getBackgroundStyle = (): { style: React.CSSProperties; opacity: string } => {
@@ -105,7 +105,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       )}
       <header className="border-b border-border relative z-10 bg-background/80 backdrop-blur-sm">
         <div className="container mx-auto px-8 py-6 flex items-center justify-between">
-          <Link to="/dashboard" className="flex items-center gap-3 group">
+          <Link to={user ? '/dashboard' : '/'} className="flex items-center gap-3 group">
             <Gift className="w-5 h-5 text-foreground" strokeWidth={1.5} />
             <h1 className="text-2xl font-serif font-semibold tracking-tight text-foreground">
               Trinkets
@@ -113,7 +113,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <FlowerAccent variant="small" className="w-6 h-6 opacity-60 group-hover:opacity-100 transition-opacity" />
           </Link>
           <nav className="flex items-center gap-8">
-            {navItems.filter(item => !item.requiresAuth || user).map(({ to, icon: Icon, label }) => {
+            {navItems.map(({ to, icon: Icon, label }) => {
               const active =
                 to === '/inspiration'
                   ? location.pathname === '/inspiration' || location.pathname.startsWith('/inspiration/')
@@ -143,7 +143,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             ) : (
               <Link
                 to="/auth"
-                className="flex items-center gap-2 text-sm font-medium text-purple-700 bg-purple-50 hover:bg-purple-100 px-4 py-2 rounded-full transition-colors"
+                className="flex items-center gap-2 text-sm tracking-wide text-muted-foreground hover:text-foreground border border-border rounded-full px-4 py-2 transition-colors"
               >
                 Sign In
               </Link>

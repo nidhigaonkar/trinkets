@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-// UI preview: uncomment when wiring real auth
-// import { supabase } from '@/integrations/supabase/client';
-// import { lovable } from '@/integrations/lovable/index';
+import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -31,15 +29,8 @@ const Auth = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      // Stub for UI preview (Supabase commented out)
-      await new Promise(r => setTimeout(r, 500));
-      toast({
-        description: mode === 'signup' ? 'Welcome! Account created.' : 'Welcome back 💕',
-      });
-
-      /* Supabase auth — restore when ready:
       if (mode === 'signup') {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -48,13 +39,18 @@ const Auth = () => {
           },
         });
         if (error) throw error;
-        toast({ description: 'Welcome! Account created.' });
+        if (data.session) {
+          toast({ description: 'Welcome! Account created.' });
+        } else {
+          toast({
+            description: 'Account created. Check your email to confirm, then sign in.',
+          });
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        toast({ description: 'Welcome back 💕' });
+        toast({ description: 'Welcome back!' });
       }
-      */
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Something went wrong';
       toast({ description: message, variant: 'destructive' });
@@ -102,10 +98,6 @@ const Auth = () => {
           </div>
         </div>
 
-        {/* Decorative floating elements */}
-        <FlowerAccent variant="small" className="absolute top-[10%] left-[15%] w-12 h-12 opacity-20 animate-pulse" />
-        <FlowerAccent variant="small" className="absolute bottom-[15%] right-[10%] w-16 h-16 opacity-20 animate-pulse delay-700" />
-        <FlowerAccent variant="small" className="absolute top-[20%] right-[20%] w-8 h-8 opacity-10" />
       </div>
 
       {/* Right Panel - Auth Form */}
@@ -124,7 +116,7 @@ const Auth = () => {
             <CardDescription className="text-muted-foreground">
               {mode === 'signup' 
                 ? 'Join our community of thoughtful gift-givers.' 
-                : 'Sign in to continue your journey of giving.'}
+                : 'Sign in for gift ideas and more!'}
             </CardDescription>
           </CardHeader>
           
